@@ -10,18 +10,21 @@ class Game:
         # to give the computer/dealer its cards, following the "17 rule"
         self.computer_cards = []
         self.computer_total = 0
+        computer_ace_1 = 0
         while self.computer_total < 17:
             card = random.choice(self.deck)
             self.computer_cards.append(card)
             self.deck.remove(card)
             self.computer_total += card_value(card)
-        # recalculate total if there's computer total is a bust if Ace is counted as 11
-        if 'A' in self.computer_cards and self.computer_total > 21:
-            self.computer_total = self.computer_total - 10
+            # recalculate total if there's computer total is a bust if an Ace is counted as 11
+            if self.computer_cards.count('A') > computer_ace_1 and self.computer_total > 21:
+                self.computer_total = self.computer_total - 10
+                computer_ace_1 += 1
 
         # to give the player their first two cards
         self.player_cards = []
         self.player_total = 0
+        self.player_ace_1 = 0
         for i in range(2):
             card = random.choice(self.deck)
             self.player_cards.append(card)
@@ -53,5 +56,6 @@ class Game:
         self.player_cards.append(card)
         self.deck.remove(card)
         self.player_total += card_value(card)
-        if self.player_total > 21 and 'A' in self.player_cards:
-            self.player_total -= 10
+        if self.player_cards.count('A') > self.player_ace_1 and self.player_total > 21:
+            self.player_total = self.player_total - 10
+            self.player_ace_1 += 1
