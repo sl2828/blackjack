@@ -4,6 +4,7 @@ from cards import *
 
 class Game:
     def __init__(self, deck):
+        """initializes the game by drawing cards for computer and the first two cards for the player"""
         # deck for this instance of game
         self.deck = deck
         # to give the computer/dealer its cards, following the "17 rule"
@@ -28,6 +29,7 @@ class Game:
             self.player_total += card_value(card)
 
     def print_card_string(self, who):
+        """Helps print out the list of cards for the player to see"""
         self_cards = self.player_cards
         if who == "computer":
             self_cards = self.computer_cards
@@ -45,6 +47,7 @@ class Game:
             return string
 
     def hit(self):
+        """Series of events that happen when users decide to hit"""
         card = random.choice(self.deck)
         print(f"You drew a {card}.")
         self.player_cards.append(card)

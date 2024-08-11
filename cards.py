@@ -1,4 +1,5 @@
 def card_value(card):
+    """Defining the value of the cards"""
     if card == "A":
         return 11
     elif card == "2":
