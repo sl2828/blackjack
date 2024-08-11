@@ -9,7 +9,7 @@ double_menu = "Enter your option with its corresponding number:\n1. Stand\n2. Hi
 both_menu = "Enter your option with its corresponding number:\n1. Stand\n2. Hit\n3. Double Down\n4. Split\n"
 # creating a new deck with 52 cards at the start of each game
 deck = []
-for i in range(4):
+for i in range(6):
     deck.extend(original_deck)
 
 # make new instance of a game
@@ -24,7 +24,13 @@ print(f"The computer's first card is {current_game.computer_cards[0]}.")
 
 round_continues = True
 while round_continues:
-    print(f"Your cards are {current_game.print_card_string('player')}. Your total is {current_game.player_total}.")
+    if current_game.player_total == 21:
+        print("You got lucky! 21.")
+        break
+    if 'A' in current_game.player_cards:
+        print(f"Your cards are {current_game.print_card_string('player')}. Your total is soft {current_game.player_total}.")
+    else:
+        print(f"Your cards are {current_game.print_card_string('player')}. Your total is {current_game.player_total}.")
     choice = ""
     while True:
         choice = input(usual_menu)
@@ -49,7 +55,7 @@ while round_continues:
         elif current_game.computer_total > current_game.player_total:
             print("Computer won the round!")
         elif current_game.computer_total == current_game.player_total:
-            print("Stand-off!")
+            print("Stand-off! There was a draw.")
         else:
             print("You've won the round!")
         round_continues = False
