@@ -2,6 +2,7 @@ import random
 from cards import *
 from game import *
 
+
 original_deck = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 usual_menu = "Enter your option with its corresponding number:\n1. Stand\n2. Hit\n"
 play_again_menu = "Do you want to play again?\n1. Yes\n2. No\n"
