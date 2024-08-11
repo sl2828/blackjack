@@ -13,7 +13,11 @@ class Game:
             card = random.choice(self.deck)
             self.computer_cards.append(card)
             self.deck.remove(card)
-            self.computer_total += card_value(card, self.computer_total)
+            self.computer_total += card_value(card)
+        # recalculate total if there's computer total is a bust if Ace is counted as 11
+        if 'A' in self.computer_cards and self.computer_total > 21:
+            self.computer_total = self.computer_total - 10
+
         # to give the player their first two cards
         self.player_cards = []
         self.player_total = 0
@@ -21,7 +25,7 @@ class Game:
             card = random.choice(self.deck)
             self.player_cards.append(card)
             self.deck.remove(card)
-            self.player_total += card_value(card, self.player_total)
+            self.player_total += card_value(card)
 
     def print_card_string(self, who):
         self_cards = self.player_cards
@@ -42,6 +46,9 @@ class Game:
 
     def hit(self):
         card = random.choice(self.deck)
+        print(f"You drew a {card}.")
         self.player_cards.append(card)
         self.deck.remove(card)
-        self.player_total += card_value(card, self.player_total)
+        self.player_total += card_value(card)
+        if self.player_total > 21 and 'A' in self.player_cards:
+            self.player_total -= 10
